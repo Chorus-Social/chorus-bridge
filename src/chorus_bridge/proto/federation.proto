@@ -1,0 +1,44 @@
+syntax = "proto3";
+package chorus;
+
+message FederationEnvelope {
+  string sender_instance = 1;
+  uint64 timestamp = 2;
+  string message_type = 3; // e.g., "PostAnnouncement"
+  bytes message_data = 4; // Nested message content
+  bytes signature = 5;
+}
+
+message PostAnnouncement {
+  bytes post_id = 1;
+  bytes author_pubkey = 2;
+  bytes content_hash = 3;
+  uint32 order_index = 4;
+  int32 creation_day = 5;
+}
+
+message UserRegistration {
+  bytes user_pubkey = 1;
+  int32 registration_day = 2;
+  bytes day_proof_hash = 3;
+}
+
+message DayProof {
+  int32 day_number = 1;
+  bytes canonical_proof_hash = 2;
+  bytes validator_quorum_sig = 3;
+}
+
+message ModerationEvent {
+  bytes target_ref = 1;
+  string action = 2;
+  bytes reason_hash = 3;
+  int32 creation_day = 4;
+}
+
+message InstanceJoinRequest {
+  string instance_id = 1;
+  bytes instance_pubkey = 2;
+  string contact_info = 3;
+  uint64 timestamp = 4;
+}
