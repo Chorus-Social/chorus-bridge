@@ -5,7 +5,7 @@ import random
 from dataclasses import dataclass
 from typing import Tuple
 
-from chorus_bridge.proto.federation_messages import PostAnnouncement
+from chorus_bridge.proto import federation_pb2 as pb2
 from chorus_bridge.schemas import ActivityPubNote
 
 
@@ -32,12 +32,14 @@ class ActivityPubTranslator:
         offset = rng.randint(0, 86_400)
         return self.genesis_timestamp + (day_number * 86_400) + offset
 
-    def build_note(self, post: PostAnnouncement) -> Tuple[ActivityPubNote, int]:
+    def build_note(
+        self, post: pb2.PostAnnouncement, body_md: str
+    ) -> Tuple[ActivityPubNote, int]:
         actor_uri = self._actor_uri(post.author_pubkey)
-        published_ts = self.derive_publish_timestamp(post.day_number, post.post_id)
+        published_ts = self.derive_publish_timestamp(post.creation_day, post.post_id)
         note = ActivityPubNote(
             attributedTo=actor_uri,
-            content=post.body_md,
+            content=body_md,
             published=self._format_timestamp(published_ts),
         )
         return note, published_ts
