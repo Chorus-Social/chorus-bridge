@@ -205,3 +205,51 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+.DS_Store
+
+# Chorus Bridge specific
+# Environment files
+.env.local
+.env.production
+.env.test
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+logs/
+*.log
+
+# Trust store files (sensitive)
+trust_store.json
+*.key
+*.pem
+*.crt
+
+# Backup files
+*.backup
+*.bak
+*.tmp
+
+# Test data
+test_data/
+*.test
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+
+# Profiling data
+*.prof
+profile.stats
+
+# Docker volumes
+postgres_data/
+grafana_data/
+prometheus_data/
+
+# Kubernetes secrets
+k8s/secret.yaml

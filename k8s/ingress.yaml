@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chorus-bridge-ingress
+  namespace: chorus-bridge
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - bridge.chorus.social
+    secretName: chorus-bridge-tls
+  rules:
+  - host: bridge.chorus.social
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: chorus-bridge-service
+            port:
+              number: 8000
