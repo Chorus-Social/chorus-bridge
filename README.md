@@ -3,7 +3,7 @@
 [![Documentation](https://img.shields.io/badge/docs-complete-brightgreen)](./docs/README.md)
 [![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](./tests/)
 [![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen)](./SANITIZATION_REPORT.md)
-[![License](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
+[![License](https://img.shields.io/badge/license-GPLv3-blue)](./LICENSE)
 
 **Chorus Bridge** is the federation and replication layer of the Chorus Network, designed to enable secure, efficient, and scalable communication between Chorus Stage instances while maintaining the network's core principles of anonymity and decentralization.
 
