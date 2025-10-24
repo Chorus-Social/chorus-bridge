@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chorus-bridge
+  namespace: chorus-bridge
+  labels:
+    app: chorus-bridge
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chorus-bridge
+  template:
+    metadata:
+      labels:
+        app: chorus-bridge
+    spec:
+      containers:
+      - name: bridge
+        image: chorus/bridge:latest
+        ports:
+        - containerPort: 8000
+          name: http
+        - containerPort: 9090
+          name: metrics
+        envFrom:
+        - configMapRef:
+            name: bridge-config
+        - secretRef:
+            name: bridge-secrets
+        env:
+        - name: BRIDGE_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: bridge-secrets
+              key: database-url
+        - name: BRIDGE_JWT_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: bridge-secrets
+              key: jwt-public-key
+        - name: BRIDGE_BRIDGE_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: bridge-secrets
+              key: bridge-private-key
+        - name: BRIDGE_BRIDGE_JWT_SIGNING_KEY
+          valueFrom:
+            secretKeyRef:
+              name: bridge-secrets
+              key: bridge-jwt-signing-key
+        - name: BRIDGE_CONDUCTOR_BASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: bridge-secrets
+              key: conductor-base-url
+        - name: BRIDGE_ACTIVITYPUB_ACTOR_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: bridge-secrets
+              key: activitypub-actor-domain
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: trust-store
+          mountPath: /app/trust.json
+          subPath: trust.json
+          readOnly: true
+      volumes:
+      - name: trust-store
+        configMap:
+          name: trust-store
+      restartPolicy: Always
