@@ -42,4 +42,9 @@ def verify_signature(payload: bytes, signature: bytes, verify_key: VerifyKey) ->
         raise SignatureVerificationError("signature verification failed") from exc
 
 
-__all__ = ["decode_hex", "envelope_fingerprint", "verify_signature", "SignatureVerificationError"]
+__all__ = [
+    "decode_hex",
+    "envelope_fingerprint",
+    "verify_signature",
+    "SignatureVerificationError",
+]
