@@ -3,7 +3,7 @@ package chorus;
 
 message FederationEnvelope {
   string sender_instance = 1;
-  uint64 timestamp = 2;
+  uint64 nonce = 2; // Changed from timestamp to nonce for replay protection
   string message_type = 3; // e.g., "PostAnnouncement"
   bytes message_data = 4; // Nested message content
   bytes signature = 5;
@@ -41,4 +41,92 @@ message InstanceJoinRequest {
   bytes instance_pubkey = 2;
   string contact_info = 3;
   uint64 timestamp = 4;
+}
+
+message CommunityCreation {
+  bytes community_id = 1;
+  bytes creator_pubkey = 2;
+  string name = 3;
+  string description = 4;
+  int32 creation_day = 5;
+}
+
+message UserUpdate {
+  bytes user_pubkey = 1;
+  bytes updated_fields_payload = 2; // JSON string of updated fields
+  int32 update_day = 3;
+}
+
+message CommunityUpdate {
+  bytes community_id = 1;
+  bytes updated_fields_payload = 2; // JSON string of updated fields
+  int32 update_day = 3;
+}
+
+message CommunityMembershipUpdate {
+  bytes community_id = 1;
+  bytes user_pubkey = 2;
+  string action = 3; // "join" or "leave"
+  int32 update_day = 4;
+}
+
+message BlacklistUpdate {
+  string instance_id = 1;
+  string action = 2; // "add" or "remove"
+  int32 update_day = 3;
+}
+
+// Conductor gRPC Service Definitions
+service ConductorBridge {
+  rpc SubmitEvent (ConductorEvent) returns (ConductorReceipt);
+  rpc SubmitEventsBatch (ConductorEventBatch) returns (ConductorReceiptBatch);
+  rpc GetDayProof (DayProofRequest) returns (DayProofResponse);
+  rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+message ConductorEvent {
+  string event_type = 1;
+  int32 epoch = 2;
+  bytes payload = 3;
+  map<string, string> metadata = 4;
+}
+
+message ConductorReceipt {
+  string event_hash = 1;
+  int32 epoch = 2;
+}
+
+message DayProofRequest {
+  int32 day_number = 1;
+}
+
+message DayProofResponse {
+  int32 day_number = 1;
+  string proof = 2;
+  string proof_hash = 3;
+  bool canonical = 4;
+  string source = 5;
+}
+
+// Batch operations for efficiency
+message ConductorEventBatch {
+  repeated ConductorEvent events = 1;
+}
+
+message ConductorReceiptBatch {
+  repeated ConductorReceipt receipts = 1;
+}
+
+// Health check messages
+message HealthCheckRequest {
+  string service = 1;
+}
+
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+  }
+  ServingStatus status = 1;
 }

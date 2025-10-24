@@ -4,43 +4,64 @@
 # source: federation.proto
 # Protobuf Python Version: 6.31.1
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
-    _runtime_version.Domain.PUBLIC,
-    6,
-    31,
-    1,
-    '',
-    'federation.proto'
+    _runtime_version.Domain.PUBLIC, 6, 31, 1, "", "federation.proto"
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10\x66\x65\x64\x65ration.proto\x12\x06\x63horus\"\x7f\n\x12\x46\x65\x64\x65rationEnvelope\x12\x17\n\x0fsender_instance\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x14\n\x0cmessage_type\x18\x03 \x01(\t\x12\x14\n\x0cmessage_data\x18\x04 \x01(\x0c\x12\x11\n\tsignature\x18\x05 \x01(\x0c\"{\n\x10PostAnnouncement\x12\x0f\n\x07post_id\x18\x01 \x01(\x0c\x12\x15\n\rauthor_pubkey\x18\x02 \x01(\x0c\x12\x14\n\x0c\x63ontent_hash\x18\x03 \x01(\x0c\x12\x13\n\x0border_index\x18\x04 \x01(\r\x12\x14\n\x0c\x63reation_day\x18\x05 \x01(\x05\"Y\n\x10UserRegistration\x12\x13\n\x0buser_pubkey\x18\x01 \x01(\x0c\x12\x18\n\x10registration_day\x18\x02 \x01(\x05\x12\x16\n\x0e\x64\x61y_proof_hash\x18\x03 \x01(\x0c\"Z\n\x08\x44\x61yProof\x12\x12\n\nday_number\x18\x01 \x01(\x05\x12\x1c\n\x14\x63\x61nonical_proof_hash\x18\x02 \x01(\x0c\x12\x1c\n\x14validator_quorum_sig\x18\x03 \x01(\x0c\"`\n\x0fModerationEvent\x12\x12\n\ntarget_ref\x18\x01 \x01(\x0c\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12\x13\n\x0breason_hash\x18\x03 \x01(\x0c\x12\x14\n\x0c\x63reation_day\x18\x04 \x01(\x05\"l\n\x13InstanceJoinRequest\x12\x13\n\x0binstance_id\x18\x01 \x01(\t\x12\x17\n\x0finstance_pubkey\x18\x02 \x01(\x0c\x12\x14\n\x0c\x63ontact_info\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x04\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x10\x66\x65\x64\x65ration.proto\x12\x06\x63horus"{\n\x12\x46\x65\x64\x65rationEnvelope\x12\x17\n\x0fsender_instance\x18\x01 \x01(\t\x12\r\n\x05nonce\x18\x02 \x01(\x04\x12\x14\n\x0cmessage_type\x18\x03 \x01(\t\x12\x14\n\x0cmessage_data\x18\x04 \x01(\x0c\x12\x11\n\tsignature\x18\x05 \x01(\x0c"{\n\x10PostAnnouncement\x12\x0f\n\x07post_id\x18\x01 \x01(\x0c\x12\x15\n\rauthor_pubkey\x18\x02 \x01(\x0c\x12\x14\n\x0c\x63ontent_hash\x18\x03 \x01(\x0c\x12\x13\n\x0border_index\x18\x04 \x01(\r\x12\x14\n\x0c\x63reation_day\x18\x05 \x01(\x05"Y\n\x10UserRegistration\x12\x13\n\x0buser_pubkey\x18\x01 \x01(\x0c\x12\x18\n\x10registration_day\x18\x02 \x01(\x05\x12\x16\n\x0e\x64\x61y_proof_hash\x18\x03 \x01(\x0c"Z\n\x08\x44\x61yProof\x12\x12\n\nday_number\x18\x01 \x01(\x05\x12\x1c\n\x14\x63\x61nonical_proof_hash\x18\x02 \x01(\x0c\x12\x1c\n\x14validator_quorum_sig\x18\x03 \x01(\x0c"`\n\x0fModerationEvent\x12\x12\n\ntarget_ref\x18\x01 \x01(\x0c\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12\x13\n\x0breason_hash\x18\x03 \x01(\x0c\x12\x14\n\x0c\x63reation_day\x18\x04 \x01(\x05"l\n\x13InstanceJoinRequest\x12\x13\n\x0binstance_id\x18\x01 \x01(\t\x12\x17\n\x0finstance_pubkey\x18\x02 \x01(\x0c\x12\x14\n\x0c\x63ontact_info\x18\x03 \x01(\t\x12\x11\n\ttimestamp\x18\x04 \x01(\x04"z\n\x11\x43ommunityCreation\x12\x14\n\x0c\x63ommunity_id\x18\x01 \x01(\x0c\x12\x16\n\x0e\x63reator_pubkey\x18\x02 \x01(\x0c\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x14\n\x0c\x63reation_day\x18\x05 \x01(\x05"U\n\nUserUpdate\x12\x13\n\x0buser_pubkey\x18\x01 \x01(\x0c\x12\x1e\n\x16updated_fields_payload\x18\x02 \x01(\x0c\x12\x12\n\nupdate_day\x18\x03 \x01(\x05"[\n\x0f\x43ommunityUpdate\x12\x14\n\x0c\x63ommunity_id\x18\x01 \x01(\x0c\x12\x1e\n\x16updated_fields_payload\x18\x02 \x01(\x0c\x12\x12\n\nupdate_day\x18\x03 \x01(\x05"j\n\x19\x43ommunityMembershipUpdate\x12\x14\n\x0c\x63ommunity_id\x18\x01 \x01(\x0c\x12\x13\n\x0buser_pubkey\x18\x02 \x01(\x0c\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\x12\x12\n\nupdate_day\x18\x04 \x01(\x05"J\n\x0f\x42lacklistUpdate\x12\x13\n\x0binstance_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12\x12\n\nupdate_day\x18\x03 \x01(\x05"\xad\x01\n\x0e\x43onductorEvent\x12\x12\n\nevent_type\x18\x01 \x01(\t\x12\r\n\x05\x65poch\x18\x02 \x01(\x05\x12\x0f\n\x07payload\x18\x03 \x01(\x0c\x12\x36\n\x08metadata\x18\x04 \x03(\x0b\x32$.chorus.ConductorEvent.MetadataEntry\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01"5\n\x10\x43onductorReceipt\x12\x12\n\nevent_hash\x18\x01 \x01(\t\x12\r\n\x05\x65poch\x18\x02 \x01(\x05"%\n\x0f\x44\x61yProofRequest\x12\x12\n\nday_number\x18\x01 \x01(\x05"l\n\x10\x44\x61yProofResponse\x12\x12\n\nday_number\x18\x01 \x01(\x05\x12\r\n\x05proof\x18\x02 \x01(\t\x12\x12\n\nproof_hash\x18\x03 \x01(\t\x12\x11\n\tcanonical\x18\x04 \x01(\x08\x12\x0e\n\x06source\x18\x05 \x01(\t2\x94\x01\n\x0f\x43onductorBridge\x12?\n\x0bSubmitEvent\x12\x16.chorus.ConductorEvent\x1a\x18.chorus.ConductorReceipt\x12@\n\x0bGetDayProof\x12\x17.chorus.DayProofRequest\x1a\x18.chorus.DayProofResponseb\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'federation_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "federation_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  DESCRIPTOR._loaded_options = None
-  _globals['_FEDERATIONENVELOPE']._serialized_start=28
-  _globals['_FEDERATIONENVELOPE']._serialized_end=155
-  _globals['_POSTANNOUNCEMENT']._serialized_start=157
-  _globals['_POSTANNOUNCEMENT']._serialized_end=280
-  _globals['_USERREGISTRATION']._serialized_start=282
-  _globals['_USERREGISTRATION']._serialized_end=371
-  _globals['_DAYPROOF']._serialized_start=373
-  _globals['_DAYPROOF']._serialized_end=463
-  _globals['_MODERATIONEVENT']._serialized_start=465
-  _globals['_MODERATIONEVENT']._serialized_end=561
-  _globals['_INSTANCEJOINREQUEST']._serialized_start=563
-  _globals['_INSTANCEJOINREQUEST']._serialized_end=671
+    DESCRIPTOR._loaded_options = None
+    _globals["_CONDUCTOREVENT_METADATAENTRY"]._loaded_options = None
+    _globals["_CONDUCTOREVENT_METADATAENTRY"]._serialized_options = b"8\001"
+    _globals["_FEDERATIONENVELOPE"]._serialized_start = 28
+    _globals["_FEDERATIONENVELOPE"]._serialized_end = 151
+    _globals["_POSTANNOUNCEMENT"]._serialized_start = 153
+    _globals["_POSTANNOUNCEMENT"]._serialized_end = 276
+    _globals["_USERREGISTRATION"]._serialized_start = 278
+    _globals["_USERREGISTRATION"]._serialized_end = 367
+    _globals["_DAYPROOF"]._serialized_start = 369
+    _globals["_DAYPROOF"]._serialized_end = 459
+    _globals["_MODERATIONEVENT"]._serialized_start = 461
+    _globals["_MODERATIONEVENT"]._serialized_end = 557
+    _globals["_INSTANCEJOINREQUEST"]._serialized_start = 559
+    _globals["_INSTANCEJOINREQUEST"]._serialized_end = 667
+    _globals["_COMMUNITYCREATION"]._serialized_start = 669
+    _globals["_COMMUNITYCREATION"]._serialized_end = 791
+    _globals["_USERUPDATE"]._serialized_start = 793
+    _globals["_USERUPDATE"]._serialized_end = 878
+    _globals["_COMMUNITYUPDATE"]._serialized_start = 880
+    _globals["_COMMUNITYUPDATE"]._serialized_end = 971
+    _globals["_COMMUNITYMEMBERSHIPUPDATE"]._serialized_start = 973
+    _globals["_COMMUNITYMEMBERSHIPUPDATE"]._serialized_end = 1079
+    _globals["_BLACKLISTUPDATE"]._serialized_start = 1081
+    _globals["_BLACKLISTUPDATE"]._serialized_end = 1155
+    _globals["_CONDUCTOREVENT"]._serialized_start = 1158
+    _globals["_CONDUCTOREVENT"]._serialized_end = 1331
+    _globals["_CONDUCTOREVENT_METADATAENTRY"]._serialized_start = 1284
+    _globals["_CONDUCTOREVENT_METADATAENTRY"]._serialized_end = 1331
+    _globals["_CONDUCTORRECEIPT"]._serialized_start = 1333
+    _globals["_CONDUCTORRECEIPT"]._serialized_end = 1386
+    _globals["_DAYPROOFREQUEST"]._serialized_start = 1388
+    _globals["_DAYPROOFREQUEST"]._serialized_end = 1425
+    _globals["_DAYPROOFRESPONSE"]._serialized_start = 1427
+    _globals["_DAYPROOFRESPONSE"]._serialized_end = 1535
+    _globals["_CONDUCTORBRIDGE"]._serialized_start = 1538
+    _globals["_CONDUCTORBRIDGE"]._serialized_end = 1686
 # @@protoc_insertion_point(module_scope)
